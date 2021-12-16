@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 import {
   Switch,
   Route,
@@ -12,10 +12,23 @@ import styled from "styled-components";
 import { fetchCoinInfo, fetchCoinTickers } from "../api";
 import Chart from "./Chart";
 import Price from "./Price";
+import { faHome } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+const Home = styled.h1`
+color: ${(props) => props.theme.accentColor};
+font-size:40px;
+transition: all 0.2s ease-in-out;
+&:hover{
+  transform: scale(1.2);
+  opacity:0.8;
+}
+`;
 
 const Title = styled.h1`
   font-size: 48px;
   color: ${(props) => props.theme.accentColor};
+  margin-right:70px;
 `;
 
 const Loader = styled.span`
@@ -27,19 +40,20 @@ const Container = styled.div`
   padding: 0px 20px;
   max-width: 480px;
   margin: 0 auto;
+  color:${props => props.theme.textColor};
 `;
 
 const Header = styled.header`
   height: 15vh;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
 `;
 
 const Overview = styled.div`
   display: flex;
   justify-content: space-between;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${props => props.theme.listColor};
   padding: 10px 20px;
   border-radius: 10px;
 `;
@@ -48,6 +62,7 @@ const OverviewItem = styled.div`
   flex-direction: column;
   align-items: center;
   width: 33%;
+  
   span:first-child {
     font-size: 10px;
     font-weight: 400;
@@ -71,7 +86,7 @@ const Tab = styled.span<{ isActive: boolean }>`
   text-transform: uppercase;
   font-size: 12px;
   font-weight: 400;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${props => props.theme.listColor};
   border-radius: 10px;
   color: ${(props) =>
     props.isActive ? props.theme.accentColor : props.theme.textColor};
@@ -152,12 +167,25 @@ function Coin() {
   );
   const { isLoading: tickersLoading, data: tickersData } = useQuery<PriceData>(
     ["tickers", coinId],
-    () => fetchCoinTickers(coinId)
+    () => fetchCoinTickers(coinId),
+    {
+      refetchInterval: 5000,
+    }
   );
   const loading = infoLoading || tickersLoading;
   return (
-    <Container>
+    <HelmetProvider>
+ <Container>
+      <Helmet>
+        <title>
+          {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
+        </title>
+      </Helmet>
       <Header>
+        <Home>
+          <Link to={"/"}><FontAwesomeIcon icon={faHome} /></Link>
+        
+        </Home>
         <Title>
           {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
         </Title>
@@ -176,8 +204,8 @@ function Coin() {
               <span>${infoData?.symbol}</span>
             </OverviewItem>
             <OverviewItem>
-              <span>Open Source:</span>
-              <span>{infoData?.open_source ? "Yes" : "No"}</span>
+              <span>Price:</span>
+              <span>${tickersData?.quotes.USD.price.toFixed(3)}</span>
             </OverviewItem>
           </Overview>
           <Description>{infoData?.description}</Description>
@@ -206,12 +234,14 @@ function Coin() {
               <Price />
             </Route>
             <Route path={`/:coinId/chart`}>
-            <Chart coinId={coinId} />
+              <Chart coinId={coinId} />
             </Route>
           </Switch>
         </>
       )}
     </Container>
+    </HelmetProvider>
+   
   );
 }
 export default Coin;

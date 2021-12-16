@@ -1,7 +1,9 @@
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import Router from "./Router";
 import { ReactQueryDevtools } from "react-query/devtools";
-
+import { darkTheme,lightTheme } from "./theme";
+import { ThemeProvider } from "styled-components";
+import { useState } from "react";
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
 html, body, div, span, applet, object, iframe,
@@ -57,9 +59,9 @@ table {
 body {
   font-weight: 300;
   font-family: 'Source Sans Pro', sans-serif;
-  background-color:${(props) => props.theme.bgColor};
-  color:${(props) => props.theme.textColor};
   line-height: 1.2;
+  background-color:${(props) => props.theme.bgColor};
+  z-index: 100;
 }
 a {
   text-decoration:none;
@@ -67,13 +69,44 @@ a {
 }
 `;
 
+const Btn = styled.button`
+position: relative;
+    top: 30px;
+    left: 58%;
+  height:30px;
+  margin-bottom: 10px;
+  border-radius: 10rem;
+  text-transform: uppercase;
+  transition: all .5s;
+  color:${(props) => props.theme.btnTextColor};
+  background-color:${(props) => props.theme.btnBgColor};
+  &:hover{
+    background-color:${(props) => props.theme.btnOpColor};
+    color:${(props) => props.theme.btnbtnTextOpColor};
+  }
+  
+`;
+
 function App() {
+
+  const [theme, setTheme] = useState('light');
+  const toggleTheme = () => {
+    if (theme === 'light') {
+      setTheme('dark');
+    } else {
+      setTheme('light');
+    }
+  }
   return (
-    <>
+    <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+<>
       <GlobalStyle />
+      <Btn onClick={toggleTheme}>{theme === 'light' ? "light Mode" : "Dark Mode"} </Btn>
       <Router />
       <ReactQueryDevtools initialIsOpen={true} />
     </>
+    </ThemeProvider>
+    
   );
 }
 

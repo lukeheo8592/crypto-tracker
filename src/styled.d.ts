@@ -5,5 +5,10 @@ declare module "styled-components" {
     textColor: string;
     bgColor: string;
     accentColor: string;
+    listColor: string;
+    btnBgColor: string;
+    btnOpColor: string;
+    btnTextColor: string;
+    btnbtnTextOpColor: string;
   }
 }
