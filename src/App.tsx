@@ -69,7 +69,7 @@ a {
 }
 `;
 
-const Btn = styled.button`
+ const Btn = styled.button`
 position: relative;
     top: 30px;
     left: 58%;
@@ -101,7 +101,7 @@ function App() {
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
 <>
       <GlobalStyle />
-      <Btn onClick={toggleTheme}>{theme === 'light' ? "light Mode" : "Dark Mode"} </Btn>
+      <Btn id="themeMode" onClick={toggleTheme}>{theme === 'light' ? "light Mode" : "Dark Mode"} </Btn>
       <Router />
       <ReactQueryDevtools initialIsOpen={true} />
     </>

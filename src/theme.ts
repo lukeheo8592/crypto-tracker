@@ -3,7 +3,7 @@ import { DefaultTheme } from "styled-components";
 export const darkTheme: DefaultTheme = {
     bgColor: "#2d3436",
     textColor: "#ffffff",
-    accentColor: "#9c88ff",
+    accentColor: "#8854d0",
     listColor: "#b2bec3",
     btnBgColor: "rgb(5, 5, 5)",
     btnOpColor: "rgb(219, 217, 217)",

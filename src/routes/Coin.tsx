@@ -84,8 +84,8 @@ const Tabs = styled.div`
 const Tab = styled.span<{ isActive: boolean }>`
   text-align: center;
   text-transform: uppercase;
-  font-size: 12px;
-  font-weight: 400;
+  font-size: 14px;
+  font-weight: 700;
   background-color: ${props => props.theme.listColor};
   border-radius: 10px;
   color: ${(props) =>
