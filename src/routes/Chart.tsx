@@ -38,6 +38,9 @@ function Chart({ coinId }: ChartProps) {
           options={{
             theme: {
               mode: btn?.innerText === "LIGHT MODE" ? "light" : "dark",
+            },title: {
+              text: `${coinId} Chart`,
+              align: "left",
             },
             chart: {
               type: "candlestick",
