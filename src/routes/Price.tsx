@@ -43,7 +43,7 @@ const Container = styled.div`
 const Overview = styled.main`
   width: 100%;
   height: 40px;
-  background-color: white;
+  background-color:#F8EFBA;
   padding: 10px;
   display: flex;
   justify-content: space-between;
