@@ -123,7 +123,6 @@ function Price({ coinId, tickersData }: PriceProps) {
     setLoading(false);
   }, [coinId, tickersData]);
 
-  console.log(data);
   return (
     <Container>
       {loading ? (
