@@ -1,6 +1,8 @@
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+published with nelify
+web site => https://luke-crypto-tracker.netlify.app/
 
 ## Available Scripts
 
