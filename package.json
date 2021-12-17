@@ -41,7 +41,6 @@
       "react-app/jest"
     ]
   },
-  "homepage": "https://lukeheo8592.github.io/crypto-tracker",
   "browserslist": {
     "production": [
       ">0.2%",
