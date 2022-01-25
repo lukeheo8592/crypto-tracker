@@ -1,4 +1,6 @@
 # Getting Started with Create React App
+In this project, data from the Crypto Price API is imported using React Query. It also uses a scalable design system and dark mode using Styled Components. Finally, I used Apex Charts to visualize data on cryptocurrency market changes.
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 published with nelify
